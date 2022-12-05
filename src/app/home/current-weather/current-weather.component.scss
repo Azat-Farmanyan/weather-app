@@ -1,0 +1,84 @@
+.current-weather-block {
+  min-height: 242px;
+  position: relative;
+  .loading {
+    position: absolute;
+    top: 50%;
+    left: 45%;
+  }
+  .weather-body {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    cursor: pointer;
+    .left-side {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      .title {
+        font-weight: 500;
+        font-size: 32px;
+        line-height: 38px;
+        color: var(--violet);
+      }
+      .left-body {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        .humidity-block {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+        }
+      }
+    }
+    .center {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      .weather-icon img {
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+      }
+      .weather-text {
+        font-weight: 300;
+        font-size: 24px;
+        line-height: 28px;
+        margin-right: 25px;
+        // @media only screen and (max-width: 485px) {
+        //   margin: 0;
+        // }
+      }
+      .weather-celsius {
+        font-weight: 700;
+        font-size: 70px;
+        line-height: 82px;
+      }
+    }
+    .right-side {
+      display: flex;
+      flex-direction: column;
+      align-self: flex-end;
+      .refresh {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        cursor: pointer;
+      }
+      .max-min-temp {
+        display: flex;
+        gap: 5px;
+        .min-temp,
+        .max-temp {
+          display: flex;
+          align-items: center;
+          gap: 2px;
+        }
+      }
+    }
+  }
+}

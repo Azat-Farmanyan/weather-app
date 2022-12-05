@@ -1,0 +1,10 @@
+<div *ngIf="typing" (click)="closeInput()" class="dark-bg">
+</div>
+<div (click)="typing=true" class='search'>
+  <form [formGroup]="inputForm" (ngSubmit)="setNewCity()">
+    <input formControlName="cityName" class='search-input' type="text" placeholder='New York'>
+    <button type='submit'>
+      <img class='search-icon' src="../../assets/icons/search-icon.png" alt="">
+    </button>
+  </form>
+</div>
