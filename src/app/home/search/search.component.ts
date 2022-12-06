@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { map, Subscription } from 'rxjs';
 import { WeatherService } from '../../core/services/weather.service';
 
@@ -27,9 +27,11 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
   setNewCity() {
     const inputCityName = this.inputForm.value.cityName;
-    this.weatherService.activeCity.next(inputCityName);
-    this.inputForm.reset();
-    this.closeInput();
+    if (inputCityName) {
+      this.weatherService.activeCity.next(inputCityName);
+      this.inputForm.reset();
+      this.closeInput();
+    }
   }
 
   // getCurrentWeather() {

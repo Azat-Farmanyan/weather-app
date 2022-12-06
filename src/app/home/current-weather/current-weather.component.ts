@@ -19,6 +19,13 @@ import { LoaderService } from 'src/app/shared/loading-spinner/loader.service';
   styleUrls: ['./current-weather.component.scss'],
 })
 export class CurrentWeatherComponent implements OnInit, OnDestroy {
+  error: {
+    isError: boolean;
+    errorText: string;
+  } = {
+    isError: false,
+    errorText: '',
+  };
   isLoading = false;
   activeCityName = '';
   activeCityData: todayWeather = {};
@@ -52,34 +59,48 @@ export class CurrentWeatherComponent implements OnInit, OnDestroy {
       this.isLoading = true;
       this.coordinateSubs = this.weatherService
         .getCoordinates(activeCity)
-        .pipe(delay(2000))
-        .subscribe((city) => {
-          if (city.length > 0) {
-            this.currentWeatherSubs = this.weatherService
-              .getCurrentWeatherByCoordinates(city[0].lat, city[0].lon)
-              .pipe(
-                tap((data) => {
-                  this.weatherDescription = data.weather?.slice(
-                    0
-                  )[0] as weatherDescription;
+        // .pipe(delay(2000))
+        .subscribe(
+          (city) => {
+            if (city.length > 0) {
+              this.currentWeatherSubs = this.weatherService
+                .getCurrentWeatherByCoordinates(city[0].lat, city[0].lon)
+                .pipe(
+                  tap((data) => {
+                    this.weatherDescription = data.weather?.slice(
+                      0
+                    )[0] as weatherDescription;
 
-                  this.weatherIconPath =
-                    'http://openweathermap.org/img/wn/' +
-                    this.weatherDescription.icon +
-                    '@2x.png';
-                })
-              )
-              .subscribe((currentWeatherData: todayWeather) => {
-                this.activeCityData = currentWeatherData;
-                this.isLoading = false;
-                this.loaderService.hide();
-              });
-          } else {
-            this.weatherService.activeCity.next('Akhaltsikhe');
-            this.isLoading = false;
-            this.loaderService.hide();
+                    this.weatherIconPath =
+                      'http://openweathermap.org/img/wn/' +
+                      this.weatherDescription.icon +
+                      '@2x.png';
+                  })
+                )
+                .subscribe(
+                  (currentWeatherData: todayWeather) => {
+                    this.activeCityData = currentWeatherData;
+                    this.isLoading = false;
+                    this.loaderService.hide();
+                  },
+                  (error) => {
+                    console.log(error);
+                    this.error.errorText =
+                      error.statusText + '!!!' + ' Please try later';
+                  }
+                );
+            } else {
+              this.weatherService.activeCity.next('Akhaltsikhe');
+              this.isLoading = false;
+              this.loaderService.hide();
+            }
+          },
+          (error) => {
+            console.log(error);
+            this.error.errorText =
+              error.statusText + '!!!' + ' Please try later';
           }
-        });
+        );
     }
   }
 

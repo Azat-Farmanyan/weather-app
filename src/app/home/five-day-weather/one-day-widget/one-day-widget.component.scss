@@ -1,0 +1,17 @@
+.one-day {
+  cursor: pointer;
+  .one-day-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    @media only screen and (max-width: 500px) {
+      gap: 5px;
+    }
+    &:hover {
+      .text {
+        font-weight: 500;
+      }
+    }
+  }
+}

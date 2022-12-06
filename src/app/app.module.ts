@@ -8,6 +8,9 @@ import { AppComponent } from './app.component';
 import { SearchComponent } from './home/search/search.component';
 import { CurrentWeatherComponent } from './home/current-weather/current-weather.component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { ModalComponent } from './shared/modal/modal.component';
+import { FiveDayBlockComponent } from './home/five-day-weather/five-day-block/five-day-block.component';
+import { OneDayWidgetComponent } from './home/five-day-weather/one-day-widget/one-day-widget.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +18,9 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
     SearchComponent,
     CurrentWeatherComponent,
     LoadingSpinnerComponent,
+    ModalComponent,
+    FiveDayBlockComponent,
+    OneDayWidgetComponent,
   ],
   imports: [
     BrowserModule,

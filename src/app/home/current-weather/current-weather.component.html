@@ -40,13 +40,18 @@
   </div>
   <ng-template #loadingText>
     <div class="loading">
-      Loading...
+      <div *ngIf="error.isError;else errorBlock">
+        Loading...
+      </div>
     </div>
+    <ng-template #errorBlock>
+      {{error.errorText}}
+    </ng-template>
     <!-- <app-loading-spinner></app-loading-spinner> -->
   </ng-template>
 </div>
 
-<div class='current-weather-block card'>
+<!-- <div class='current-weather-block card'>
   {{activeCityName}}
   <pre>{{activeCityData | json}}</pre>
-</div>
+</div> -->
