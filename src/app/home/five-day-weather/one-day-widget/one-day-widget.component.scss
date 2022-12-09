@@ -13,5 +13,12 @@
         font-weight: 500;
       }
     }
+    .weather-icon {
+      // display: flex;
+      width: 80px;
+      @media only screen and (max-width: 600px) {
+        width: 50px;
+      }
+    }
   }
 }

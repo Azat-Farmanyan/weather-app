@@ -2,7 +2,7 @@
   <div class="one-day-body">
     <p class='text'>{{weekDay}}</p>
     <p class='text'>{{date}}</p>
-    <img src="../../../../assets/icons/humidity.png" alt="">
-    <p class='text'>{{weatherData[0].main.temp}}</p>
+    <img class='weather-icon' [src]="weatherIconPath" alt="">
+    <p class='text'>{{weatherData[middleWeather].main.temp}}°</p>
   </div>
 </div>

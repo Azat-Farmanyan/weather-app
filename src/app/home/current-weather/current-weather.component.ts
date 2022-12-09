@@ -85,9 +85,10 @@ export class CurrentWeatherComponent implements OnInit, OnDestroy {
                       0
                     )[0] as weatherDescription;
 
-                    this.weatherIconPath = this.weatherIconByCode(
-                      this.weatherDescription.icon as string
-                    );
+                    this.weatherIconPath =
+                      this.weatherService.weatherIconByCode(
+                        this.weatherDescription.icon as string
+                      );
                   })
                 )
                 .subscribe(
@@ -137,10 +138,6 @@ export class CurrentWeatherComponent implements OnInit, OnDestroy {
     const yyyy = today.getFullYear();
 
     this.todayDate = dd + '/' + mm + '/' + yyyy; // dd/mm/yyy
-  }
-
-  weatherIconByCode(iconCode: string) {
-    return 'http://openweathermap.org/img/wn/' + iconCode + '@2x.png';
   }
 
   ngOnDestroy(): void {
