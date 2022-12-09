@@ -1,11 +1,11 @@
-<div class="card five-day-block">
-  <app-one-day-widget></app-one-day-widget>
-  <app-one-day-widget></app-one-day-widget>
-  <app-one-day-widget></app-one-day-widget>
-  <app-one-day-widget></app-one-day-widget>
-  <app-one-day-widget></app-one-day-widget>
-  <app-one-day-widget></app-one-day-widget>
-</div>
-<div class='card'>
-  <pre>{{fiveDayWeather | json}}</pre>
+<div class="card ">
+
+  <div class='five-day-block' *ngIf="!isLoading;else loadingBlock">
+    <app-one-day-widget *ngFor="let weather of fiveDayWeatherGroupedByDate" [weatherData]="weather">
+    </app-one-day-widget>
+  </div>
+
+  <ng-template #loadingBlock>
+    Loading ...
+  </ng-template>
 </div>

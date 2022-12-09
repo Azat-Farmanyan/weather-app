@@ -58,20 +58,14 @@ export class WeatherService {
   getFiveDayWeatherByCoordinates(lat: number, lon: number) {
     // console.log(lat);
     // console.log(lon);
-    return this.http
-      .get<fiveDayWeather>(fiveDayWeatherHTTP, {
-        params: {
-          lon: lon,
-          lat: lat,
-          appid: APIkey,
-          lang: 'en',
-        },
-      })
-      .pipe(
-        map((data) => {
-          // console.log(data);
-          return data;
-        })
-      );
+    return this.http.get<fiveDayWeather>(fiveDayWeatherHTTP, {
+      params: {
+        lon: lon,
+        lat: lat,
+        appid: APIkey,
+        lang: 'en',
+        units: 'metric',
+      },
+    });
   }
 }

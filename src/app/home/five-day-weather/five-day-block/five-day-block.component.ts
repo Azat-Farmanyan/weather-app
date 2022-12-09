@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { first, Subscription } from 'rxjs';
+import { delay, first, Subscription } from 'rxjs';
 import {
   fiveDayWeather,
   listItemDayWeather,
@@ -12,25 +12,21 @@ import { WeatherService } from 'src/app/core/services/weather.service';
   styleUrls: ['./five-day-block.component.scss'],
 })
 export class FiveDayBlockComponent implements OnInit, OnDestroy {
-  constructor(private weatherService: WeatherService) {}
+  isLoading = false;
 
   fiveDayWeather: fiveDayWeather;
   fiveDayWeatherGroupedByDate: listItemDayWeather[][] = [];
 
-  todayWeather: listItemDayWeather[];
-  day2Weather: listItemDayWeather[];
-  day3Weather: listItemDayWeather[];
-  day4Weather: listItemDayWeather[];
-  day5Weather: listItemDayWeather[];
-  day6Weather: listItemDayWeather[];
-
   activeCityCoordinatesSubs: Subscription;
   fiveDayWeatherSubs: Subscription;
+
+  constructor(private weatherService: WeatherService) {}
 
   ngOnInit(): void {
     this.activeCityCoordinatesSubs =
       this.weatherService.activeCityCoordinates.subscribe(
         (activeCoordinates) => {
+          this.isLoading = true;
           this.fiveDayWeatherSubs = this.weatherService
             .getFiveDayWeatherByCoordinates(
               activeCoordinates.lat,
@@ -50,12 +46,15 @@ export class FiveDayBlockComponent implements OnInit, OnDestroy {
                   finalWeather[date] = [games];
                 }
               });
+
+              this.fiveDayWeatherGroupedByDate = [];
               for (const key in finalWeather) {
                 if (Object.prototype.hasOwnProperty.call(finalWeather, key)) {
                   const element: listItemDayWeather[] = finalWeather[key];
                   this.fiveDayWeatherGroupedByDate.push(element);
                 }
               }
+              this.isLoading = false;
               console.log(this.fiveDayWeatherGroupedByDate);
             });
         }
