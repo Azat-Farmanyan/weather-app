@@ -26,6 +26,7 @@
       </p>
     </div>
     <div class="right-side">
+
       <div class="max-min-temp">
         <div class="min-temp">
           <img src="../../../assets/icons/arrow-down.png" alt="arrow down">
@@ -43,10 +44,10 @@
       <div *ngIf="error.isError;else errorBlock">
         Loading...
       </div>
+      <ng-template #errorBlock>
+        {{error.errorText}}
+      </ng-template>
     </div>
-    <ng-template #errorBlock>
-      {{error.errorText}}
-    </ng-template>
     <!-- <app-loading-spinner></app-loading-spinner> -->
   </ng-template>
 </div>

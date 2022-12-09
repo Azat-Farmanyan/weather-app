@@ -8,12 +8,12 @@ import { WeatherService } from '../../core/services/weather.service';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
 })
-export class SearchComponent implements OnInit, OnDestroy {
+export class SearchComponent implements OnInit {
   inputForm: FormGroup;
   typing = false;
 
-  coordinateSubs: Subscription;
-  currentWeatherSubs: Subscription;
+  // coordinateSubs: Subscription;
+  // currentWeatherSubs: Subscription;
 
   constructor(private weatherService: WeatherService) {}
 
@@ -53,27 +53,23 @@ export class SearchComponent implements OnInit, OnDestroy {
   //       });
   //   }
   // }
-  getForFiveDayWeather() {
-    const inputCityName = this.inputForm.value.cityName;
-    if (!!inputCityName) {
-      this.coordinateSubs = this.weatherService
-        .getCoordinates(inputCityName)
-        .subscribe((city) => {
-          if (city.length > 0) {
-            console.log(city);
-            this.currentWeatherSubs = this.weatherService
-              .getFiveDayWeatherByCoordinates(city[0].lat, city[0].lon)
-              .subscribe((weatherData) => {
-                console.log(weatherData);
-                this.inputForm.reset();
-                this.closeInput();
-              });
-          }
-        });
-    }
-  }
-  ngOnDestroy(): void {
-    this.coordinateSubs.unsubscribe();
-    this.currentWeatherSubs.unsubscribe();
-  }
+  // getForFiveDayWeather() {
+  //   const inputCityName = this.inputForm.value.cityName;
+  //   if (!!inputCityName) {
+  //     this.coordinateSubs = this.weatherService
+  //       .getCoordinates(inputCityName)
+  //       .subscribe((city) => {
+  //         if (city.length > 0) {
+  //           console.log(city);
+  //           this.currentWeatherSubs = this.weatherService
+  //             .getFiveDayWeatherByCoordinates(+city[0].lat, +city[0].lon)
+  //             .subscribe((weatherData) => {
+  //               console.log(weatherData);
+  //               this.inputForm.reset();
+  //               this.closeInput();
+  //             });
+  //         }
+  //       });
+  //   }
+  // }
 }

@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, map, Subject } from 'rxjs';
 import {
   APIkey,
   coordinateHTTP,
   fiveDayWeatherHTTP,
   oneDayWeatherHTTP,
 } from 'src/app/core/constants/constants';
-import { todayWeather } from '../interfaces/interfaces';
+import { fiveDayWeather, lonLat, todayWeather } from '../interfaces/interfaces';
 
 export interface coordinates {
   lat: string;
@@ -18,7 +18,18 @@ export interface coordinates {
   providedIn: 'root',
 })
 export class WeatherService {
-  activeCity = new BehaviorSubject<string>('Akhaltsikhe');
+  activeCity = new BehaviorSubject<string>(
+    (localStorage.getItem('activeCity') as string)
+      ? (localStorage.getItem('activeCity') as string)
+      : 'Akhaltsikhe'
+  );
+  activeCityCoordinates = new BehaviorSubject<lonLat>(
+    JSON.parse(
+      localStorage.getItem('activeCityCoordinates') as string
+    ) as lonLat
+  );
+
+  // weatherIconPath = 'http://openweathermap.org/img/wn/11d@2x.png';
 
   constructor(private http: HttpClient) {}
 
@@ -32,8 +43,8 @@ export class WeatherService {
     });
   }
   getCurrentWeatherByCoordinates(lat: string, lon: string) {
-    // console.log(lat);
-    // console.log(lon);
+    console.log(lat);
+    console.log(lon);
     return this.http.get<todayWeather>(oneDayWeatherHTTP, {
       params: {
         lon: lon,
@@ -44,16 +55,23 @@ export class WeatherService {
       },
     });
   }
-  getFiveDayWeatherByCoordinates(lat: string, lon: string) {
-    console.log(lat);
-    console.log(lon);
-    return this.http.get(fiveDayWeatherHTTP, {
-      params: {
-        lon: lon,
-        lat: lat,
-        appid: APIkey,
-        lang: 'en',
-      },
-    });
+  getFiveDayWeatherByCoordinates(lat: number, lon: number) {
+    // console.log(lat);
+    // console.log(lon);
+    return this.http
+      .get<fiveDayWeather>(fiveDayWeatherHTTP, {
+        params: {
+          lon: lon,
+          lat: lat,
+          appid: APIkey,
+          lang: 'en',
+        },
+      })
+      .pipe(
+        map((data) => {
+          // console.log(data);
+          return data;
+        })
+      );
   }
 }

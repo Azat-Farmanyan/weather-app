@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { delay, Subscription, tap } from 'rxjs';
 import {
+  lonLat,
   todayWeather,
   weatherDescription,
 } from 'src/app/core/interfaces/interfaces';
@@ -30,8 +31,8 @@ export class CurrentWeatherComponent implements OnInit, OnDestroy {
   activeCityName = '';
   activeCityData: todayWeather = {};
   weatherDescription: weatherDescription = {};
-  weekDay = '';
-  todayDate = '';
+  weekDay = ''; // sunday, monday
+  todayDate = ''; // dd/mm/yyy
   weatherIconPath = 'http://openweathermap.org/img/wn/11d@2x.png';
 
   coordinateSubs: Subscription;
@@ -63,18 +64,30 @@ export class CurrentWeatherComponent implements OnInit, OnDestroy {
         .subscribe(
           (city) => {
             if (city.length > 0) {
+              localStorage.setItem('activeCity', activeCity);
+              const activeCityCoordinates: lonLat = {
+                lon: +city[0].lon,
+                lat: +city[0].lat,
+              };
+              localStorage.setItem(
+                'activeCityCoordinates',
+                JSON.stringify(activeCityCoordinates)
+              );
+              this.weatherService.activeCityCoordinates.next(
+                activeCityCoordinates
+              );
               this.currentWeatherSubs = this.weatherService
                 .getCurrentWeatherByCoordinates(city[0].lat, city[0].lon)
                 .pipe(
-                  tap((data) => {
+                  tap((data: todayWeather) => {
+                    // console.log(data);
                     this.weatherDescription = data.weather?.slice(
                       0
                     )[0] as weatherDescription;
 
-                    this.weatherIconPath =
-                      'http://openweathermap.org/img/wn/' +
-                      this.weatherDescription.icon +
-                      '@2x.png';
+                    this.weatherIconPath = this.weatherIconByCode(
+                      this.weatherDescription.icon as string
+                    );
                   })
                 )
                 .subscribe(
@@ -123,7 +136,11 @@ export class CurrentWeatherComponent implements OnInit, OnDestroy {
     const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     const yyyy = today.getFullYear();
 
-    this.todayDate = mm + '/' + dd + '/' + yyyy;
+    this.todayDate = dd + '/' + mm + '/' + yyyy; // dd/mm/yyy
+  }
+
+  weatherIconByCode(iconCode: string) {
+    return 'http://openweathermap.org/img/wn/' + iconCode + '@2x.png';
   }
 
   ngOnDestroy(): void {
