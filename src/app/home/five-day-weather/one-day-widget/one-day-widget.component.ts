@@ -37,7 +37,7 @@ export class OneDayWidgetComponent implements OnInit, OnChanges {
       this.middleWeather === 1 ? 1 : Math.floor(this.weatherData.length / 2);
 
     this.weekDay = this.dateService.getWeekDay(
-      'long',
+      'short',
       this.weatherData[0].dt_txt
     );
     this.weatherIconPath = this.weatherService.weatherIconByCode(

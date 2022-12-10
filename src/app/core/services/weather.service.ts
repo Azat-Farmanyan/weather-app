@@ -28,6 +28,7 @@ export class WeatherService {
       localStorage.getItem('activeCityCoordinates') as string
     ) as lonLat
   );
+  currentWeatherData = new Subject<todayWeather>();
 
   // weatherIconPath = 'http://openweathermap.org/img/wn/11d@2x.png';
 

@@ -11,6 +11,7 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
 import { ModalComponent } from './shared/modal/modal.component';
 import { FiveDayBlockComponent } from './home/five-day-weather/five-day-block/five-day-block.component';
 import { OneDayWidgetComponent } from './home/five-day-weather/one-day-widget/one-day-widget.component';
+import { CurrentWeatherDescriptionComponent } from './home/current-weather-description/current-weather-description.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { OneDayWidgetComponent } from './home/five-day-weather/one-day-widget/on
     ModalComponent,
     FiveDayBlockComponent,
     OneDayWidgetComponent,
+    CurrentWeatherDescriptionComponent,
   ],
   imports: [
     BrowserModule,

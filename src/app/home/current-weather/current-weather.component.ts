@@ -99,6 +99,9 @@ export class CurrentWeatherComponent implements OnInit, OnDestroy {
                 .subscribe(
                   (currentWeatherData: todayWeather) => {
                     this.activeCityData = currentWeatherData;
+                    this.weatherService.currentWeatherData.next(
+                      currentWeatherData
+                    );
                     this.isLoading = false;
                     this.loaderService.hide();
                   },

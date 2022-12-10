@@ -1,0 +1,65 @@
+<!-- <div class="card">
+  <pre>{{currentWeatherData | json}}</pre>
+</div> -->
+
+<div class="block">
+  <div *ngIf="isLoading;else content" class="card">
+    Loading...
+  </div>
+  <ng-template #content>
+    <div class="card">
+      <p class='bold-text'>Temperature</p>
+      <p class='text'>{{currentWeatherData.main?.temp}}°</p>
+    </div>
+    <div class="card">
+      <p class='bold-text'>Temperature feels like</p>
+      <p class='text'>{{currentWeatherData.main?.feels_like}}°</p>
+    </div>
+    <div class="card">
+      <p class='bold-text'>Pressure</p>
+      <p class='text'>{{currentWeatherData.main?.pressure}} hPa</p>
+    </div>
+  </ng-template>
+</div>
+
+<div class="block">
+  <div *ngIf="isLoading;else content" class="card">
+    Loading...
+  </div>
+  <ng-template #content>
+
+    <div class="card">
+      <p class='bold-text'>Wind speed</p>
+      <p class='text'>{{currentWeatherData.wind?.speed}} meter/sec</p>
+    </div>
+    <div class="card">
+      <p class='bold-text'>Cloudiness</p>
+      <p class='text'>{{currentWeatherData.clouds?.all}} %</p>
+    </div>
+    <div class="card">
+      <p class='bold-text'>Wind deg</p>
+      <p class='text'>{{currentWeatherData.wind?.deg}} °</p>
+    </div>
+  </ng-template>
+</div>
+
+
+<div class="block">
+  <div *ngIf="isLoading;else content" class="card">
+    Loading...
+  </div>
+  <ng-template #content>
+    <div class="card">
+      <p class='bold-text'>Visibility</p>
+      <p class='text'>{{currentWeatherData.visibility}} m</p>
+    </div>
+    <div class="card">
+      <p class='bold-text'>Sunrise</p>
+      <p class='text'>{{sunrise}}</p>
+    </div>
+    <div class="card">
+      <p class='bold-text'>Sunset</p>
+      <p class='text'>{{sunset}}</p>
+    </div>
+  </ng-template>
+</div>
