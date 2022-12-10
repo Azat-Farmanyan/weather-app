@@ -23,10 +23,10 @@
 </div>
 
 <div class="block">
-  <div *ngIf="isLoading;else content" class="card">
+  <div *ngIf="isLoading;else content2" class="card">
     Loading...
   </div>
-  <ng-template #content>
+  <ng-template #content2>
 
     <div class="card">
       <p class='bold-text'>Wind speed</p>
@@ -45,10 +45,10 @@
 
 
 <div class="block">
-  <div *ngIf="isLoading;else content" class="card">
+  <div *ngIf="isLoading;else content3" class="card">
     Loading...
   </div>
-  <ng-template #content>
+  <ng-template #content3>
     <div class="card">
       <p class='bold-text'>Visibility</p>
       <p class='text'>{{currentWeatherData.visibility}} m</p>
