@@ -13,6 +13,8 @@ import { WeatherService } from 'src/app/core/services/weather.service';
 })
 export class FiveDayBlockComponent implements OnInit, OnDestroy {
   isLoading = false;
+  error = false;
+  errorText = '';
 
   fiveDayWeather: fiveDayWeather;
   fiveDayWeatherGroupedByDate: listItemDayWeather[][] = [];
@@ -32,31 +34,35 @@ export class FiveDayBlockComponent implements OnInit, OnDestroy {
               activeCoordinates.lat,
               activeCoordinates.lon
             )
-            .subscribe((fiveDayWeatherData) => {
-              console.log('get');
+            .subscribe(
+              (fiveDayWeatherData) => {
+                this.fiveDayWeather = fiveDayWeatherData;
+                const list = fiveDayWeatherData.list;
+                let finalWeather: { [key: string]: listItemDayWeather[] } = {};
+                list.forEach((games) => {
+                  const date = games.dt_txt.split(' ')[0];
+                  if (finalWeather[date]) {
+                    finalWeather[date].push(games);
+                  } else {
+                    finalWeather[date] = [games];
+                  }
+                });
 
-              this.fiveDayWeather = fiveDayWeatherData;
-              const list = fiveDayWeatherData.list;
-              let finalWeather: { [key: string]: listItemDayWeather[] } = {};
-              list.forEach((games) => {
-                const date = games.dt_txt.split(' ')[0];
-                if (finalWeather[date]) {
-                  finalWeather[date].push(games);
-                } else {
-                  finalWeather[date] = [games];
+                this.fiveDayWeatherGroupedByDate = [];
+                for (const key in finalWeather) {
+                  if (Object.prototype.hasOwnProperty.call(finalWeather, key)) {
+                    const element: listItemDayWeather[] = finalWeather[key];
+                    this.fiveDayWeatherGroupedByDate.push(element);
+                  }
                 }
-              });
-
-              this.fiveDayWeatherGroupedByDate = [];
-              for (const key in finalWeather) {
-                if (Object.prototype.hasOwnProperty.call(finalWeather, key)) {
-                  const element: listItemDayWeather[] = finalWeather[key];
-                  this.fiveDayWeatherGroupedByDate.push(element);
-                }
+                this.isLoading = false;
+              },
+              (errorData) => {
+                this.isLoading = false;
+                this.error = true;
+                this.errorText = errorData.statusText;
               }
-              this.isLoading = false;
-              console.log(this.fiveDayWeatherGroupedByDate);
-            });
+            );
         }
       );
   }

@@ -1,11 +1,11 @@
 .current-weather-block {
   min-height: 242px;
   position: relative;
-  .loading {
-    position: absolute;
-    top: 50%;
-    left: 40%;
-  }
+  // .loading {
+  //   position: absolute;
+  //   top: 50%;
+  //   left: 40%;
+  // }
   .weather-body {
     position: relative;
     display: flex;
@@ -63,12 +63,16 @@
       display: flex;
       flex-direction: column;
       align-self: flex-end;
-      .refresh {
+      .refresh-block {
         position: absolute;
-        top: 10px;
-        right: 15px;
-        cursor: pointer;
+        top: 0px;
+        right: 0px;
+        .refresh {
+          cursor: pointer;
+          width: 15px;
+        }
       }
+
       .max-min-temp {
         display: flex;
         gap: 5px;

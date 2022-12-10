@@ -55,9 +55,9 @@ export class CurrentWeatherComponent implements OnInit, OnDestroy {
     );
   }
   getCurrentWeather(activeCity: string) {
+    this.isLoading = true;
     if (!!activeCity) {
       this.loaderService.show();
-      this.isLoading = true;
       this.coordinateSubs = this.weatherService
         .getCoordinates(activeCity)
         // .pipe(delay(2000))
@@ -99,20 +99,20 @@ export class CurrentWeatherComponent implements OnInit, OnDestroy {
                   },
                   (error) => {
                     console.log(error);
-                    this.error.errorText =
-                      error.statusText + '!!!' + ' Please try later';
+                    this.isLoading = false;
+                    this.error.errorText = error.statusText;
                   }
                 );
             } else {
               this.weatherService.activeCity.next('Akhaltsikhe');
-              this.isLoading = false;
+              // this.isLoading = false;
               this.loaderService.hide();
             }
           },
           (error) => {
             console.log(error);
-            this.error.errorText =
-              error.statusText + '!!!' + ' Please try later';
+            this.isLoading = false;
+            this.error.errorText = error.statusText;
           }
         );
     }

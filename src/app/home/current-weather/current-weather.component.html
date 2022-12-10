@@ -1,58 +1,56 @@
 <app-loading-spinner></app-loading-spinner>
 
 <div class='current-weather-block card'>
-  <div *ngIf="!isLoading;else loadingText" class="weather-body">
-    <div class="left-side">
-      <h1 class='title'>{{activeCityName | uppercase}}</h1>
-      <div class="left-body">
-        <p class='text'>{{weekDay | uppercase}}</p>
-        <p class='text'>{{todayDate}}</p>
-        <p class='text'>Wind {{activeCityData.wind?.speed}} km/h</p>
-        <div class='humidity-block'>
-          <img src="../../../assets/icons/humidity.png" alt="humidity">
-          <p class='text'>{{activeCityData.main?.humidity}}%</p>
+  <div *ngIf="!isLoading;else loadingText">
+    <div *ngIf="!error.isError;else errorBlock" class="weather-body">
+      <div class="left-side">
+        <h1 class='title'>{{activeCityName | uppercase}}</h1>
+        <div class="left-body">
+          <p class='text'>{{weekDay | uppercase}}</p>
+          <p class='text'>{{todayDate}}</p>
+          <p class='text'>Wind {{activeCityData.wind?.speed}} km/h</p>
+          <div class='humidity-block'>
+            <img src="../../../assets/icons/humidity.png" alt="humidity">
+            <p class='text'>{{activeCityData.main?.humidity?activeCityData.main?.humidity:'---'}}%</p>
+          </div>
+        </div>
+      </div>
+      <div class="center">
+        <div class="weather-icon">
+          <img [src]='weatherIconPath' [alt]="weatherDescription.main">
+        </div>
+        <h2 class='weather-text'>
+          {{weatherDescription.description?(weatherDescription.description|titlecase): 'not found'}}
+        </h2>
+        <p class='weather-celsius'>
+          {{ activeCityData.main?.temp ? activeCityData.main?.temp:'-'}}°
+        </p>
+      </div>
+      <div class="right-side">
+        <div class="refresh-block">
+          <p>Last update:</p>
+          <img class='refresh' src="../../../assets/icons/refresh.png" alt="">
+        </div>
+        <div class="max-min-temp">
+          <div class="min-temp">
+            <img src="../../../assets/icons/arrow-down.png" alt="arrow down">
+            <p class='text'>{{ activeCityData.main?.temp_min}}°</p>
+          </div>
+          <div class="max-temp">
+            <img src="../../../assets/icons/arrow-up.png" alt="arrow up">
+            <p class='text'>{{ activeCityData.main?.temp_max}}°</p>
+          </div>
         </div>
       </div>
     </div>
-    <div class="center">
-      <div class="weather-icon">
-        <img [src]='weatherIconPath' [alt]="weatherDescription.main">
-      </div>
-      <h2 class='weather-text'>
-        {{weatherDescription.description | titlecase}}
-      </h2>
-      <p class='weather-celsius'>
-        {{ activeCityData.main?.temp}}°
-      </p>
-    </div>
-    <div class="right-side">
-
-      <div class="max-min-temp">
-        <div class="min-temp">
-          <img src="../../../assets/icons/arrow-down.png" alt="arrow down">
-          <p class='text'>{{ activeCityData.main?.temp_min}}°</p>
-        </div>
-        <div class="max-temp">
-          <img src="../../../assets/icons/arrow-up.png" alt="arrow up">
-          <p class='text'>{{ activeCityData.main?.temp_max}}°</p>
-        </div>
-      </div>
-    </div>
+    <ng-template #errorBlock>
+      {{error.errorText}}
+    </ng-template>
   </div>
+
   <ng-template #loadingText>
     <div class="loading">
-      <div *ngIf="error.isError;else errorBlock">
-        Loading...
-      </div>
-      <ng-template #errorBlock>
-        {{error.errorText}}
-      </ng-template>
+      Loading...
     </div>
-    <!-- <app-loading-spinner></app-loading-spinner> -->
   </ng-template>
 </div>
-
-<!-- <div class='current-weather-block card'>
-  {{activeCityName}}
-  <pre>{{activeCityData | json}}</pre>
-</div> -->

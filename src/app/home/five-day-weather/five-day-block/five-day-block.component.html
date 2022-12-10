@@ -1,8 +1,13 @@
 <div class="card ">
 
-  <div class='five-day-block' *ngIf="!isLoading;else loadingBlock">
-    <app-one-day-widget *ngFor="let weather of fiveDayWeatherGroupedByDate" [weatherData]="weather">
-    </app-one-day-widget>
+  <div *ngIf="!isLoading;else loadingBlock">
+    <div *ngIf="!error;else errorBlock" class='five-day-block'>
+      <app-one-day-widget *ngFor="let weather of fiveDayWeatherGroupedByDate" [weatherData]="weather">
+      </app-one-day-widget>
+    </div>
+    <ng-template #errorBlock>
+      {{errorText}}
+    </ng-template>
   </div>
 
   <ng-template #loadingBlock>

@@ -1,5 +1,8 @@
-.five-day-block {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
+.card {
+  min-height: 192px;
+  .five-day-block {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
 }

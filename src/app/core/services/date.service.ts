@@ -9,7 +9,7 @@ export class DateService {
   getWeekDay(dayType: 'short' | 'long', date: string) {
     const day = new Date(date).getDay(); //return 0 to 6
 
-    console.log(day);
+    // console.log(day);
 
     let weekdayShort = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     let weekdayLong = [
