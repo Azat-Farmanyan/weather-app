@@ -28,8 +28,9 @@
       </div>
       <div class="right-side">
         <div class="refresh-block">
-          <p>Last update:</p>
-          <img class='refresh' src="../../../assets/icons/refresh.png" alt="">
+          <p>Last update: {{lastUpdate}}</p>
+          <img (click)="getCurrentWeather(activeCityName)" class='refresh' src="../../../assets/icons/refresh.png"
+            alt="">
         </div>
         <div class="max-min-temp">
           <div class="min-temp">

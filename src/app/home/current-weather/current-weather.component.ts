@@ -11,6 +11,7 @@ import {
   todayWeather,
   weatherDescription,
 } from 'src/app/core/interfaces/interfaces';
+import { DateService } from 'src/app/core/services/date.service';
 import { WeatherService } from 'src/app/core/services/weather.service';
 import { LoaderService } from 'src/app/shared/loading-spinner/loader.service';
 
@@ -33,6 +34,7 @@ export class CurrentWeatherComponent implements OnInit, OnDestroy {
   weatherDescription: weatherDescription = {};
   weekDay = ''; // sunday, monday
   todayDate = ''; // dd/mm/yyy
+  lastUpdate = this.dateService.formatDate(new Date());
   weatherIconPath = 'http://openweathermap.org/img/wn/11d@2x.png';
 
   coordinateSubs: Subscription;
@@ -41,7 +43,8 @@ export class CurrentWeatherComponent implements OnInit, OnDestroy {
 
   constructor(
     private weatherService: WeatherService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private dateService: DateService
   ) {}
 
   ngOnInit(): void {
@@ -55,6 +58,8 @@ export class CurrentWeatherComponent implements OnInit, OnDestroy {
     );
   }
   getCurrentWeather(activeCity: string) {
+    this.lastUpdate = this.dateService.formatDate(new Date());
+
     this.isLoading = true;
     if (!!activeCity) {
       this.loaderService.show();
