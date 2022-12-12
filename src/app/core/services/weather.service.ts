@@ -29,10 +29,18 @@ export class WeatherService {
     ) as lonLat
   );
   currentWeatherData = new Subject<todayWeather>();
+  lastSearchedCities = new BehaviorSubject<string[]>([]);
 
   // weatherIconPath = 'http://openweathermap.org/img/wn/11d@2x.png';
 
   constructor(private http: HttpClient) {}
+
+  addLastSearchedCity(lastCityName: string) {
+    this.lastSearchedCities.next([
+      lastCityName,
+      ...this.lastSearchedCities.getValue().slice(0, 4),
+    ]);
+  }
 
   getCoordinates(cityName: string) {
     return this.http.get<[coordinates]>(coordinateHTTP, {
@@ -44,8 +52,8 @@ export class WeatherService {
     });
   }
   getCurrentWeatherByCoordinates(lat: string, lon: string) {
-    console.log(lat);
-    console.log(lon);
+    // console.log(lat);
+    // console.log(lon);
     return this.http.get<todayWeather>(oneDayWeatherHTTP, {
       params: {
         lon: lon,

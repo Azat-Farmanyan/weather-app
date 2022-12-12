@@ -12,6 +12,7 @@ import { ModalComponent } from './shared/modal/modal.component';
 import { FiveDayBlockComponent } from './home/five-day-weather/five-day-block/five-day-block.component';
 import { OneDayWidgetComponent } from './home/five-day-weather/one-day-widget/one-day-widget.component';
 import { CurrentWeatherDescriptionComponent } from './home/current-weather-description/current-weather-description.component';
+import { LastSearchedCitiesComponent } from './home/last-searched-cities/last-searched-cities.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { CurrentWeatherDescriptionComponent } from './home/current-weather-descr
     FiveDayBlockComponent,
     OneDayWidgetComponent,
     CurrentWeatherDescriptionComponent,
+    LastSearchedCitiesComponent,
   ],
   imports: [
     BrowserModule,

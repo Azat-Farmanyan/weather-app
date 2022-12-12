@@ -51,7 +51,7 @@ export class CurrentWeatherComponent implements OnInit, OnDestroy {
     this.activeCitySubs = this.weatherService.activeCity.subscribe(
       (activeCityName) => {
         console.log('🚀', activeCityName);
-        this.activeCityName = activeCityName;
+        // this.activeCityName = activeCityName;
         this.getCurrentWeather(activeCityName);
         this.getDate('long');
       }
@@ -70,6 +70,12 @@ export class CurrentWeatherComponent implements OnInit, OnDestroy {
           (city) => {
             if (city.length > 0) {
               localStorage.setItem('activeCity', activeCity);
+
+              console.log(city);
+              this.activeCityName = activeCity;
+
+              this.weatherService.addLastSearchedCity(activeCity);
+
               const activeCityCoordinates: lonLat = {
                 lon: +city[0].lon,
                 lat: +city[0].lat,
@@ -112,8 +118,8 @@ export class CurrentWeatherComponent implements OnInit, OnDestroy {
                   }
                 );
             } else {
-              this.weatherService.activeCity.next('Akhaltsikhe');
-              // this.isLoading = false;
+              // this.weatherService.activeCity.next('Akhaltsikhe');
+              this.isLoading = false;
               this.loaderService.hide();
             }
           },
