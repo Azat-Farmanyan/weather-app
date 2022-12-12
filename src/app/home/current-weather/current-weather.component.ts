@@ -70,8 +70,6 @@ export class CurrentWeatherComponent implements OnInit, OnDestroy {
           (city) => {
             if (city.length > 0) {
               localStorage.setItem('activeCity', activeCity);
-
-              console.log(city);
               this.activeCityName = activeCity;
 
               this.weatherService.addLastSearchedCity(activeCity);

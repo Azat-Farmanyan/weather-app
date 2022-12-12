@@ -1,16 +1,35 @@
 .last-search-block {
   display: flex;
   gap: 15px;
+  overflow: auto;
+  margin-bottom: 20px;
   .card {
     padding: 10px 15px;
     font-weight: 300;
     cursor: pointer;
 
     display: flex;
+    flex-wrap: nowrap;
     align-items: center;
     gap: 8px;
+    margin-bottom: 10px;
     & img {
       width: 15px;
     }
   }
+  .card p {
+    white-space: nowrap;
+  }
+}
+::-webkit-scrollbar {
+  height: 15px;
+  width: 4px;
+  background: none;
+  @media only screen and (max-width: 600px) {
+    height: 10px;
+  }
+}
+::-webkit-scrollbar-thumb:horizontal {
+  background: var(--light-violet);
+  border-radius: 10px;
 }

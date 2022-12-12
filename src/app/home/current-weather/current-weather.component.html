@@ -4,8 +4,12 @@
   <div *ngIf="!isLoading;else loadingText">
     <div *ngIf="!error.isError;else errorBlock" class="weather-body">
       <div class="left-side">
-        <h1 class='title'>{{activeCityName | uppercase}}</h1>
+        <h1 class='title'>{{activeCityName | uppercase}} </h1>
         <div class="left-body">
+          <p class='text'>Country:
+            {{activeCityData.sys?.country | uppercase}}
+          </p>
+
           <p class='text'>{{weekDay | uppercase}}</p>
           <p class='text'>{{todayDate}}</p>
           <p class='text'>Wind {{activeCityData.wind?.speed}} km/h</p>
@@ -28,7 +32,7 @@
       </div>
       <div class="right-side">
         <div class="refresh-block">
-          <p>Last update: {{lastUpdate}}</p>
+          <p class='text'>Last update: {{lastUpdate}}</p>
           <img (click)="getCurrentWeather(activeCityName)" class='refresh' src="../../../assets/icons/refresh.png"
             alt="">
         </div>

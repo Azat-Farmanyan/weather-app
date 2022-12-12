@@ -30,16 +30,19 @@ export class WeatherService {
   );
   currentWeatherData = new Subject<todayWeather>();
   lastSearchedCities = new BehaviorSubject<string[]>([]);
-
+  beforeLastSearchedCity = '';
   // weatherIconPath = 'http://openweathermap.org/img/wn/11d@2x.png';
 
   constructor(private http: HttpClient) {}
 
   addLastSearchedCity(lastCityName: string) {
-    this.lastSearchedCities.next([
-      lastCityName,
-      ...this.lastSearchedCities.getValue().slice(0, 4),
-    ]);
+    if (this.beforeLastSearchedCity !== lastCityName) {
+      this.lastSearchedCities.next([
+        lastCityName,
+        ...this.lastSearchedCities.getValue().slice(0, 4),
+      ]);
+      this.beforeLastSearchedCity = lastCityName;
+    }
   }
 
   getCoordinates(cityName: string) {

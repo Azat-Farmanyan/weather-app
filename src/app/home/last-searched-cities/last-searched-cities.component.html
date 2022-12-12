@@ -1,9 +1,6 @@
 <div class='last-search-block' *ngIf="lastSearchedCitiesArray.length > 1">
-  <div *ngFor="let city of lastSearchedCitiesArray">
-    <div (click)="searchNewCity(city)" class="card">
-      <img src="../../../assets/icons/last-search.png" alt="last search icon">
-      <p>{{city | titlecase}}</p>
-    </div>
-
+  <div *ngFor="let city of lastSearchedCitiesArray" (click)="searchNewCity(city)" class="card">
+    <img src="../../../assets/icons/last-search.png" alt="last search icon">
+    <p>{{city | titlecase}}</p>
   </div>
 </div>
