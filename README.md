@@ -1,3 +1,9 @@
+# Screenshot
+
+#### Main page
+
+![MainPage](https://github.com/Azat-Farmanyan/weather-app/blob/main/src/assets/images/scrennshot.png?raw=true)
+
 # WeatherApp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
