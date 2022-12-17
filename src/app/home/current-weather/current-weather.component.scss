@@ -17,7 +17,6 @@
       display: flex;
       flex-direction: column;
       align-items: right;
-      // justify-content: left;
       gap: 14px;
       min-width: 150px;
       @media only screen and (max-width: 550px) {
@@ -25,6 +24,8 @@
         margin: 0 auto;
       }
       .title {
+        overflow-wrap: break-word;
+
         font-weight: 500;
         font-size: 32px;
         line-height: 38px;
@@ -91,6 +92,9 @@
       .max-min-temp {
         display: flex;
         gap: 5px;
+        @media only screen and (max-width: 650px) {
+          margin-top: 10px;
+        }
         .min-temp,
         .max-temp {
           display: flex;

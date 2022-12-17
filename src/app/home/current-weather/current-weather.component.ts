@@ -50,10 +50,22 @@ export class CurrentWeatherComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.activeCitySubs = this.weatherService.activeCity.subscribe(
       (activeCityName) => {
-        console.log('🚀', activeCityName);
-        // this.activeCityName = activeCityName;
         this.getCurrentWeather(activeCityName);
         this.getDate('long');
+
+        let lastSearchedArray: string[] = JSON.parse(
+          localStorage.getItem('lastSearchedCities') || '[]'
+        );
+        if (!lastSearchedArray.includes(activeCityName)) {
+          lastSearchedArray.unshift(activeCityName);
+          lastSearchedArray = lastSearchedArray.slice(0, 5);
+          this.weatherService.lastFiveSearchedCities.next(lastSearchedArray);
+
+          localStorage.setItem(
+            'lastSearchedCities',
+            JSON.stringify(lastSearchedArray)
+          );
+        }
       }
     );
   }
@@ -71,8 +83,6 @@ export class CurrentWeatherComponent implements OnInit, OnDestroy {
             if (city.length > 0) {
               localStorage.setItem('activeCity', activeCity);
               this.activeCityName = activeCity;
-
-              this.weatherService.addLastSearchedCity(activeCity);
 
               const activeCityCoordinates: lonLat = {
                 lon: +city[0].lon,

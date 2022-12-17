@@ -1,10 +1,15 @@
 .card {
   min-height: 85px;
+
   .five-day-block {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    @media only screen and (max-width: 500px) {
+    overflow: auto;
+    flex-wrap: wrap;
+
+    @media only screen and (max-width: 400px) {
+      gap: 20px;
     }
   }
 }

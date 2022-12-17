@@ -20,11 +20,12 @@ export class LastSearchedCitiesComponent implements OnInit, OnDestroy {
   constructor(private weatherService: WeatherService) {}
 
   ngOnInit(): void {
-    this.weatherService.lastSearchedCities.subscribe((lastCities) => {
-      this.lastSearchedCitiesArray = lastCities;
-    });
+    this.weatherService.lastFiveSearchedCities.subscribe(
+      (lastSearchedCitiesArrayData) => {
+        this.lastSearchedCitiesArray = lastSearchedCitiesArrayData;
+      }
+    );
   }
-
   searchNewCity(activeCity: string) {
     this.weatherService.activeCity.next(activeCity);
   }

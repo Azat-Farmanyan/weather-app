@@ -29,21 +29,14 @@ export class WeatherService {
     ) as lonLat
   );
   currentWeatherData = new Subject<todayWeather>();
-  lastSearchedCities = new BehaviorSubject<string[]>([]);
-  beforeLastSearchedCity = '';
+
+  lastFiveSearchedCities = new BehaviorSubject<string[]>(
+    JSON.parse(localStorage.getItem('lastSearchedCities') || '[]')
+  );
+
   // weatherIconPath = 'http://openweathermap.org/img/wn/11d@2x.png';
 
   constructor(private http: HttpClient) {}
-
-  addLastSearchedCity(lastCityName: string) {
-    if (this.beforeLastSearchedCity !== lastCityName) {
-      this.lastSearchedCities.next([
-        lastCityName,
-        ...this.lastSearchedCities.getValue().slice(0, 4),
-      ]);
-      this.beforeLastSearchedCity = lastCityName;
-    }
-  }
 
   getCoordinates(cityName: string) {
     return this.http.get<[coordinates]>(coordinateHTTP, {
@@ -55,8 +48,6 @@ export class WeatherService {
     });
   }
   getCurrentWeatherByCoordinates(lat: string, lon: string) {
-    // console.log(lat);
-    // console.log(lon);
     return this.http.get<todayWeather>(oneDayWeatherHTTP, {
       params: {
         lon: lon,
@@ -68,8 +59,6 @@ export class WeatherService {
     });
   }
   getFiveDayWeatherByCoordinates(lat: number, lon: number) {
-    // console.log(lat);
-    // console.log(lon);
     return this.http.get<fiveDayWeather>(fiveDayWeatherHTTP, {
       params: {
         lon: lon,
@@ -80,6 +69,7 @@ export class WeatherService {
       },
     });
   }
+  searchNewCity() {}
   weatherIconByCode(iconCode: string) {
     return 'http://openweathermap.org/img/wn/' + iconCode + '@2x.png';
   }
