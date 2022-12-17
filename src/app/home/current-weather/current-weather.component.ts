@@ -59,12 +59,21 @@ export class CurrentWeatherComponent implements OnInit, OnDestroy {
         if (!lastSearchedArray.includes(activeCityName)) {
           lastSearchedArray.unshift(activeCityName);
           lastSearchedArray = lastSearchedArray.slice(0, 5);
-          this.weatherService.lastFiveSearchedCities.next(lastSearchedArray);
-
           localStorage.setItem(
             'lastSearchedCities',
             JSON.stringify(lastSearchedArray)
           );
+          this.weatherService.lastFiveSearchedCities.next(lastSearchedArray);
+        } else {
+          const index = lastSearchedArray.indexOf(activeCityName);
+          lastSearchedArray.splice(index, 1);
+          lastSearchedArray.unshift(activeCityName);
+          lastSearchedArray = lastSearchedArray.slice(0, 5);
+          localStorage.setItem(
+            'lastSearchedCities',
+            JSON.stringify(lastSearchedArray)
+          );
+          this.weatherService.lastFiveSearchedCities.next(lastSearchedArray);
         }
       }
     );
