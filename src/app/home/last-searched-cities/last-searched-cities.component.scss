@@ -11,10 +11,18 @@
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     margin-bottom: 10px;
-    & img {
+
+    .clock-icon {
       width: 15px;
+    }
+    .delete-city {
+      width: 15px;
+      filter: opacity(0.5);
+      &:hover {
+        filter: opacity(1);
+      }
     }
   }
   .card p {

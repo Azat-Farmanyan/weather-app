@@ -29,6 +29,17 @@ export class LastSearchedCitiesComponent implements OnInit, OnDestroy {
   searchNewCity(activeCity: string) {
     this.weatherService.activeCity.next(activeCity);
   }
+  deleteCurrentCity(deletedCity: string) {
+    let lastSearchedArray: string[] = JSON.parse(
+      localStorage.getItem('lastSearchedCities') || '[]'
+    );
+    lastSearchedArray = lastSearchedArray.filter((el) => el !== deletedCity);
+    localStorage.setItem(
+      'lastSearchedCities',
+      JSON.stringify(lastSearchedArray)
+    );
+    this.weatherService.lastFiveSearchedCities.next(lastSearchedArray);
+  }
   ngOnDestroy(): void {
     this.lastCitiesSubs.unsubscribe();
   }
