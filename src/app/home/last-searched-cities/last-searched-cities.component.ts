@@ -20,7 +20,7 @@ export class LastSearchedCitiesComponent implements OnInit, OnDestroy {
   constructor(private weatherService: WeatherService) {}
 
   ngOnInit(): void {
-    this.weatherService.lastFiveSearchedCities.subscribe(
+    this.lastCitiesSubs = this.weatherService.lastFiveSearchedCities.subscribe(
       (lastSearchedCitiesArrayData) => {
         this.lastSearchedCitiesArray = lastSearchedCitiesArrayData;
       }

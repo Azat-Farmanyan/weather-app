@@ -1,6 +1,6 @@
 <app-loading-spinner></app-loading-spinner>
 
-<div class='current-weather-block card'>
+<div class='current-weather-block card' routerLink="/each-day">
   <div *ngIf="!isLoading;else loadingText">
     <div *ngIf="!error.isError;else errorBlock" class="weather-body">
       <div class="left-side">

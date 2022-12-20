@@ -13,6 +13,9 @@ import { FiveDayBlockComponent } from './home/five-day-weather/five-day-block/fi
 import { OneDayWidgetComponent } from './home/five-day-weather/one-day-widget/one-day-widget.component';
 import { CurrentWeatherDescriptionComponent } from './home/current-weather-description/current-weather-description.component';
 import { LastSearchedCitiesComponent } from './home/last-searched-cities/last-searched-cities.component';
+import { HomeComponent } from './home/home.component';
+import { EachDayWeatherComponent } from './each-day-weather/each-day-weather.component';
+import { EachDayModule } from './each-day-weather/each-day.module';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,7 @@ import { LastSearchedCitiesComponent } from './home/last-searched-cities/last-se
     OneDayWidgetComponent,
     CurrentWeatherDescriptionComponent,
     LastSearchedCitiesComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,7 +36,9 @@ import { LastSearchedCitiesComponent } from './home/last-searched-cities/last-se
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    EachDayModule,
   ],
+  exports: [CurrentWeatherDescriptionComponent],
   providers: [],
   bootstrap: [AppComponent],
 })

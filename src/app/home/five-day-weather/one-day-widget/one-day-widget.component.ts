@@ -16,6 +16,7 @@ import { WeatherService } from 'src/app/core/services/weather.service';
 })
 export class OneDayWidgetComponent implements OnInit, OnChanges {
   @Input() weatherData: listItemDayWeather[] = [];
+  @Input() today: string = 'Today';
   date = 'undefined';
   weekDay = '';
   averageTemp = '';
