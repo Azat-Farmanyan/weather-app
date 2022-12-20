@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, DoCheck, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { todayWeather } from 'src/app/core/interfaces/interfaces';
 import { DateService } from 'src/app/core/services/date.service';
@@ -25,8 +25,9 @@ export class CurrentWeatherDescriptionComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.currentWeatherSubs = this.weatherService.currentWeatherData.subscribe(
       (currentWeather: todayWeather) => {
-        this.currentWeatherData = currentWeather;
         this.isLoading = false;
+
+        this.currentWeatherData = currentWeather;
         this.sunrise = this.dateService.formatDate(
           new Date(
             this.currentWeatherData.sys?.sunrise
@@ -41,6 +42,10 @@ export class CurrentWeatherDescriptionComponent implements OnInit, OnDestroy {
               : '0'
           )
         );
+      },
+      (error) => {
+        console.log(error);
+        this.isLoading = false;
       }
     );
   }

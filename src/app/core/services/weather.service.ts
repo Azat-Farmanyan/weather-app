@@ -28,7 +28,7 @@ export class WeatherService {
       localStorage.getItem('activeCityCoordinates') as string
     ) as lonLat
   );
-  currentWeatherData = new Subject<todayWeather>();
+  currentWeatherData = new BehaviorSubject<todayWeather>({});
 
   lastFiveSearchedCities = new BehaviorSubject<string[]>(
     JSON.parse(localStorage.getItem('lastSearchedCities') || '[]')

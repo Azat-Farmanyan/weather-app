@@ -11,11 +11,12 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
 import { ModalComponent } from './shared/modal/modal.component';
 import { FiveDayBlockComponent } from './home/five-day-weather/five-day-block/five-day-block.component';
 import { OneDayWidgetComponent } from './home/five-day-weather/one-day-widget/one-day-widget.component';
-import { CurrentWeatherDescriptionComponent } from './home/current-weather-description/current-weather-description.component';
 import { LastSearchedCitiesComponent } from './home/last-searched-cities/last-searched-cities.component';
 import { HomeComponent } from './home/home.component';
 import { EachDayWeatherComponent } from './each-day-weather/each-day-weather.component';
 import { EachDayModule } from './each-day-weather/each-day.module';
+import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
+import { WeatherService } from './core/services/weather.service';
 
 @NgModule({
   declarations: [
@@ -26,9 +27,9 @@ import { EachDayModule } from './each-day-weather/each-day.module';
     ModalComponent,
     FiveDayBlockComponent,
     OneDayWidgetComponent,
-    CurrentWeatherDescriptionComponent,
     LastSearchedCitiesComponent,
     HomeComponent,
+    NotFoundPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +39,6 @@ import { EachDayModule } from './each-day-weather/each-day.module';
     HttpClientModule,
     EachDayModule,
   ],
-  exports: [CurrentWeatherDescriptionComponent],
   providers: [],
   bootstrap: [AppComponent],
 })
