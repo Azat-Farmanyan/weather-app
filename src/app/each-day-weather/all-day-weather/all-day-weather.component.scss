@@ -1,7 +1,9 @@
 .all-day-block {
-  display: flex;
-  height: 100%;
-  justify-content: space-between;
-  gap: 20px;
-  overflow: auto;
+  padding-bottom: 20px;
+  .all-day-body {
+    display: flex;
+    // justify-content: space-between;
+    gap: 20px;
+    overflow: auto;
+  }
 }

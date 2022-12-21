@@ -7,7 +7,12 @@ import {
   fiveDayWeatherHTTP,
   oneDayWeatherHTTP,
 } from 'src/app/core/constants/constants';
-import { fiveDayWeather, lonLat, todayWeather } from '../interfaces/interfaces';
+import {
+  fiveDayWeather,
+  listItemDayWeather,
+  lonLat,
+  todayWeather,
+} from '../interfaces/interfaces';
 
 export interface coordinates {
   lat: string;
@@ -30,6 +35,7 @@ export class WeatherService {
   );
   currentWeatherData = new BehaviorSubject<todayWeather>({});
   fiveDayWeatherData = new BehaviorSubject<fiveDayWeather>({});
+  allDayWeatherData = new BehaviorSubject<listItemDayWeather[]>([]);
 
   lastFiveSearchedCities = new BehaviorSubject<string[]>(
     JSON.parse(localStorage.getItem('lastSearchedCities') || '[]')
