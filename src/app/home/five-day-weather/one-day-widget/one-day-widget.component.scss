@@ -1,5 +1,10 @@
+.card {
+  padding: 10px 0;
+  scroll-snap-align: center;
+}
 .one-day {
   cursor: pointer;
+
   .one-day-body {
     display: flex;
     flex-direction: column;

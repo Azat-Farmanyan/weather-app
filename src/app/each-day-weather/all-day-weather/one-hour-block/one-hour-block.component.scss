@@ -1,0 +1,14 @@
+.card {
+  padding: 15px 5px;
+}
+.each-hour-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 10px;
+  .time {
+    font-size: 17px;
+  }
+}

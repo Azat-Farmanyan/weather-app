@@ -18,6 +18,7 @@ export class OneDayWidgetComponent implements OnInit, OnChanges {
   @Input() weatherData: listItemDayWeather[] = [];
   @Input() today: string = 'Today';
   date = 'undefined';
+  longDate = '';
   weekDay = '';
   averageTemp = '';
   weatherIconPath = 'http://openweathermap.org/img/wn/11d@2x.png';
@@ -28,6 +29,8 @@ export class OneDayWidgetComponent implements OnInit, OnChanges {
     private weatherService: WeatherService
   ) {}
   ngOnChanges() {
+    this.longDate = this.weatherData[0].dt_txt.split(' ')[0];
+
     this.date = this.weatherData[0].dt_txt
       .split(' ')[0]
       .split('-')

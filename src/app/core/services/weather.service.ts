@@ -29,6 +29,7 @@ export class WeatherService {
     ) as lonLat
   );
   currentWeatherData = new BehaviorSubject<todayWeather>({});
+  fiveDayWeatherData = new BehaviorSubject<fiveDayWeather>({});
 
   lastFiveSearchedCities = new BehaviorSubject<string[]>(
     JSON.parse(localStorage.getItem('lastSearchedCities') || '[]')

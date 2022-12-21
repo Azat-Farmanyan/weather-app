@@ -42,23 +42,23 @@ export interface todayWeather {
   cod?: number;
 }
 export interface fiveDayWeather {
-  city: {
-    id: number;
-    name: string;
-    coord: {
-      lat: number;
-      lon: number;
+  city?: {
+    id?: number;
+    name?: string;
+    coord?: {
+      lat?: number;
+      lon?: number;
     };
-    country: 'GE';
-    population: number;
-    timezone: number;
-    sunrise: number;
-    sunset: number;
+    country?: string;
+    population?: number;
+    timezone?: number;
+    sunrise?: number;
+    sunset?: number;
   };
-  cod: string;
-  message: number;
-  cnt: number;
-  list: listItemDayWeather[];
+  cod?: string;
+  message?: number;
+  cnt?: number;
+  list?: listItemDayWeather[];
 }
 
 export interface listItemDayWeather {

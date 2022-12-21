@@ -35,7 +35,7 @@ export class CurrentWeatherComponent implements OnInit, OnDestroy {
   activeCityData: todayWeather = {};
   weatherDescription: weatherDescription = {};
   weekDay = ''; // sunday, monday
-  todayDate = this.getTodayDate(); // dd/mm/yyy
+  todayDate = this.getTodayDate(); // yyyy/mm/dd
   lastUpdate = this.dateService.formatDate(new Date());
   weatherIconPath = 'http://openweathermap.org/img/wn/11d@2x.png';
 
@@ -172,7 +172,7 @@ export class CurrentWeatherComponent implements OnInit, OnDestroy {
     const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     const yyyy = today.getFullYear();
 
-    const todayDate = dd + '-' + mm + '-' + yyyy; // dd/mm/yyy
+    const todayDate = yyyy + '-' + mm + '-' + dd; //  yyyy/mm/dd
     return todayDate;
   }
 

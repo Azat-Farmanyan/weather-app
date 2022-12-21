@@ -1,1 +1,13 @@
-<p class='card'>all-week-weather works!</p>
+<div class='card'>
+  <div *ngIf="!isLoading">
+    <div *ngIf="!errorMessage" class="all-day-block">
+      <app-one-hour-block *ngFor="let eachHour of allDayWeather" [eachHourData]='eachHour'></app-one-hour-block>
+    </div>
+    <div *ngIf="errorMessage">
+      <p>{{errorMessage}}</p>
+    </div>
+  </div>
+  <div *ngIf="isLoading">
+    Loading...
+  </div>
+</div>

@@ -37,17 +37,19 @@ export class FiveDayBlockComponent implements OnInit, OnDestroy {
             .subscribe(
               (fiveDayWeatherData) => {
                 this.fiveDayWeather = fiveDayWeatherData;
+                this.weatherService.fiveDayWeatherData.next(fiveDayWeatherData);
                 const list = fiveDayWeatherData.list;
                 let finalWeather: { [key: string]: listItemDayWeather[] } = {};
-                list.forEach((games) => {
-                  const date = games.dt_txt.split(' ')[0];
-                  if (finalWeather[date]) {
-                    finalWeather[date].push(games);
-                  } else {
-                    finalWeather[date] = [games];
-                  }
-                });
-
+                if (!!list) {
+                  list.forEach((games) => {
+                    const date = games.dt_txt.split(' ')[0];
+                    if (finalWeather[date]) {
+                      finalWeather[date].push(games);
+                    } else {
+                      finalWeather[date] = [games];
+                    }
+                  });
+                }
                 this.fiveDayWeatherGroupedByDate = [];
                 for (const key in finalWeather) {
                   if (Object.prototype.hasOwnProperty.call(finalWeather, key)) {

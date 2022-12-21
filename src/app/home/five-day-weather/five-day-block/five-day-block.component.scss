@@ -4,12 +4,12 @@
   .five-day-block {
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     overflow: auto;
-    flex-wrap: wrap;
-
-    @media only screen and (max-width: 400px) {
-      gap: 20px;
-    }
+    flex-wrap: nowrap;
+    gap: 20px;
+    // @media only screen and (max-width: 400px) {
+    //   gap: 10px;
+    // }
   }
 }
