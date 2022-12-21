@@ -29,11 +29,13 @@ export class CurrentWeatherComponent implements OnInit, OnDestroy {
     errorText: '',
   };
   isLoading = false;
-  activeCityName = '';
+  activeCityName = JSON.stringify(
+    localStorage.getItem('activeCity') ? localStorage.getItem('activeCity') : ''
+  );
   activeCityData: todayWeather = {};
   weatherDescription: weatherDescription = {};
   weekDay = ''; // sunday, monday
-  todayDate = ''; // dd/mm/yyy
+  todayDate = this.getTodayDate(); // dd/mm/yyy
   lastUpdate = this.dateService.formatDate(new Date());
   weatherIconPath = 'http://openweathermap.org/img/wn/11d@2x.png';
 
@@ -51,7 +53,7 @@ export class CurrentWeatherComponent implements OnInit, OnDestroy {
     this.activeCitySubs = this.weatherService.activeCity.subscribe(
       (activeCityName) => {
         this.getCurrentWeather(activeCityName);
-        this.getDate('long');
+        this.getWeekDay('long');
 
         let lastSearchedArray: string[] = JSON.parse(
           localStorage.getItem('lastSearchedCities') || '[]'
@@ -149,7 +151,7 @@ export class CurrentWeatherComponent implements OnInit, OnDestroy {
     }
   }
 
-  getDate(dayType: 'short' | 'long') {
+  getWeekDay(dayType: 'short' | 'long') {
     const day = new Date().getDay(); //return 0 to 6
     let weekdayShort = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     let weekdayLong = [
@@ -162,13 +164,16 @@ export class CurrentWeatherComponent implements OnInit, OnDestroy {
       'Saturday',
     ];
     this.weekDay = dayType === 'short' ? weekdayShort[day] : weekdayLong[day];
+  }
 
+  getTodayDate() {
     const today = new Date();
     const dd = String(today.getDate()).padStart(2, '0');
     const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     const yyyy = today.getFullYear();
 
-    this.todayDate = dd + '/' + mm + '/' + yyyy; // dd/mm/yyy
+    const todayDate = dd + '-' + mm + '-' + yyyy; // dd/mm/yyy
+    return todayDate;
   }
 
   ngOnDestroy(): void {

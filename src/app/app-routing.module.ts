@@ -10,7 +10,7 @@ const routes: Routes = [
   // { path: 'each-day', component: EachDayWeatherComponent },
   { path: 'home', component: HomeComponent },
   {
-    path: 'each-day/:city/:date',
+    path: 'each-day/:activeCity/:date',
     loadChildren: () =>
       import('./each-day-weather/each-day.module').then((m) => m.EachDayModule),
   },

@@ -1,10 +1,13 @@
 <app-loading-spinner></app-loading-spinner>
 
-<div class='current-weather-block card' routerLink="/each-day/1/1">
+<div class='current-weather-block card'>
   <div *ngIf="!isLoading;else loadingText">
     <div *ngIf="!error.isError;else errorBlock" class="weather-body">
       <div class="left-side">
-        <h1 class='title'>{{activeCityName | uppercase}} </h1>
+        <div [routerLink]="['/each-day',activeCityName,todayDate]" class='title-block'>
+          <img class='show-more' src="../../../assets/icons/showMore.png" alt="Show">
+          <h1 class='title'>{{activeCityName | uppercase}} </h1>
+        </div>
         <div class="left-body">
           <p class='text'>Country:
             {{activeCityData.sys?.country | uppercase}}
