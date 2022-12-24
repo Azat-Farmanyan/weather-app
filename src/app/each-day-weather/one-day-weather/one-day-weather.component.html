@@ -1,1 +1,19 @@
-<p class='card'>one-day-weather works!</p>
+<div *ngIf="!isLoading;else loadingBlock" class="one-day-weather">
+  <p class='day-of-week'>
+    {{ today?'Today':'none' }}
+  </p>
+  <p class='date'>{{ today?todayDate:'none' }}</p>
+  <h3 class='city'>{{ (today&&!isLoading?todayWeather.name:'none') | uppercase }}</h3>
+  <div class="icon-temp-block">
+    <img [src]="weatherIconPath" alt="icon">
+    <p class='temp'>
+      {{ today&&!isLoading? todayWeather.main!.temp:'none' }}°</p>
+  </div>
+  <p class='weather-description'>
+    {{ (today? weatherDescription.description:'none')| titlecase}}
+  </p>
+</div>
+
+<ng-template #loadingBlock>
+  <p class='loading'>Loading...</p>
+</ng-template>

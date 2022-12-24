@@ -110,7 +110,8 @@ export class CurrentWeatherComponent implements OnInit, OnDestroy {
                 .getCurrentWeatherByCoordinates(city[0].lat, city[0].lon)
                 .pipe(
                   tap((data: todayWeather) => {
-                    // console.log(data);
+                    this.weatherService.currentWeatherData.next(data);
+
                     this.weatherDescription = data.weather?.slice(
                       0
                     )[0] as weatherDescription;

@@ -1,0 +1,50 @@
+.one-day-weather {
+  color: var(--white);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 230px;
+  .day-of-week {
+    color: var(--white);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+  }
+  .date {
+    color: var(--white);
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 19px;
+    margin-bottom: 15px;
+  }
+  .city {
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 42px;
+    margin-bottom: 18 px;
+  }
+  .icon-temp-block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0px;
+    margin-right: 25px;
+    .temp {
+      color: var(--white);
+      font-weight: 700;
+      font-size: 70px;
+      line-height: 82px;
+    }
+  }
+  .weather-description {
+    color: var(--white);
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 28px;
+    text-align: center;
+  }
+}
+.loading {
+  color: var(--white);
+}

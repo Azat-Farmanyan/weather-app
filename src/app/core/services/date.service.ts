@@ -25,10 +25,6 @@ export class DateService {
     return weekDay;
   }
 
-  padTo2Digits(num: number) {
-    return num.toString().padStart(2, '0');
-  }
-
   formatDate(date: Date) {
     // 2022-12-10 11:45:43
     return (
@@ -44,5 +40,8 @@ export class DateService {
         this.padTo2Digits(date.getSeconds()),
       ].join(':')
     );
+  }
+  padTo2Digits(num: number) {
+    return num.toString().padStart(2, '0');
   }
 }

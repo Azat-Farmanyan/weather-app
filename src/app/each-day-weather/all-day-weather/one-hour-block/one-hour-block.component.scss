@@ -1,8 +1,11 @@
 .card {
   padding: 15px 10px;
-  min-height: 270px;
+  // min-height: 270px;
   @media only screen and (max-width: 500px) {
-    padding: 10px 5px;
+    padding: 15px 5px;
+  }
+  @media only screen and (max-width: 400px) {
+    padding: 15px 0px;
   }
 }
 .each-hour-body {

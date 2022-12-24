@@ -30,7 +30,7 @@
           {{weatherDescription.description?(weatherDescription.description|titlecase): 'not found'}}
         </h2>
         <p class='weather-celsius'>
-          {{ activeCityData.main?.temp ? activeCityData.main?.temp:'-'}}°
+          {{ activeCityData.main?.temp ? activeCityData.main?.temp : '-'}}°
         </p>
       </div>
       <div class="right-side">
