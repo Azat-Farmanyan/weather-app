@@ -28,7 +28,7 @@ export class OneDayWeatherComponent implements OnInit, OnDestroy {
   otherDayTemp = '-';
   otherWeekDay = '';
 
-  weatherIconPath = 'http://openweathermap.org/img/wn/01d@2x.png';
+  weatherIconPath = '';
   // otherDayWeather:
   today = false;
   isLoading = false;
@@ -44,6 +44,10 @@ export class OneDayWeatherComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.fetchData();
+  }
+
+  fetchData() {
     this.activatedRoute.params.subscribe((params: Params) => {
       const activeDate = params['date']; // yyyy-mm-dd
 
@@ -67,6 +71,7 @@ export class OneDayWeatherComponent implements OnInit, OnDestroy {
           this.fiveDayWeatherSubs = this.weatherService
             .getFiveDayWeatherByCoordinates(+coordinates.lat, +coordinates.lon)
             .subscribe((fiveDayWeatherData) => {
+              this.isLoading = false;
               let otherDaysWeatherData: listItemDayWeather[] = [];
               if (fiveDayWeatherData.list) {
                 otherDaysWeatherData = fiveDayWeatherData.list;
@@ -79,17 +84,20 @@ export class OneDayWeatherComponent implements OnInit, OnDestroy {
                   currentDayListItems.length / 2
                 );
                 this.otherDayData = currentDayListItems[middleWeatherIndex];
+
                 this.otherDayTemp = String(
                   Math.round(this.otherDayData.main!.temp)
                 );
                 this.otherDayWeatherDescription =
                   this.otherDayData.weather[0].description;
-                // console.log(this.otherDayData.weather[0].description);
+
+                this.weatherIconPath = this.weatherService.weatherIconByCode(
+                  this.otherDayData.weather[0].icon
+                );
               }
             });
         }
       }
-      // console.log(this.allDayWeather);
     });
   }
 
