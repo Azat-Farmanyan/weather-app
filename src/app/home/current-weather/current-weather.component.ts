@@ -38,6 +38,7 @@ export class CurrentWeatherComponent implements OnInit, OnDestroy {
   todayDate = this.getTodayDate(); // yyyy/mm/dd
   lastUpdate = this.dateService.formatDate(new Date());
   weatherIconPath = 'http://openweathermap.org/img/wn/11d@2x.png';
+  temp = '-';
 
   coordinateSubs: Subscription;
   currentWeatherSubs: Subscription;
@@ -125,6 +126,11 @@ export class CurrentWeatherComponent implements OnInit, OnDestroy {
                 .subscribe(
                   (currentWeatherData: todayWeather) => {
                     this.activeCityData = currentWeatherData;
+                    if (this.activeCityData.main?.temp) {
+                      this.temp = String(
+                        Math.round(this.activeCityData.main?.temp)
+                      );
+                    }
                     this.weatherService.currentWeatherData.next(
                       currentWeatherData
                     );

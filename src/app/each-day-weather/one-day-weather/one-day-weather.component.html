@@ -1,16 +1,19 @@
 <div *ngIf="!isLoading;else loadingBlock" class="one-day-weather">
   <p class='day-of-week'>
-    {{ today?'Today':'none' }}
+    {{ otherWeekDay }}
   </p>
-  <p class='date'>{{ today?todayDate:'none' }}</p>
-  <h3 class='city'>{{ (today&&!isLoading?todayWeather.name:'none') | uppercase }}</h3>
+
+  <p class='date'>{{ today?todayDate:otherDate }}</p>
+  <div *ngIf="!isLoading">
+    <h3 class='city'>{{ activeCity | uppercase}}</h3>
+  </div>
   <div class="icon-temp-block">
     <img [src]="weatherIconPath" alt="icon">
     <p class='temp'>
-      {{ today&&!isLoading? todayWeather.main!.temp:'none' }}°</p>
+      {{ today&&!isLoading?todayTemp:otherDayTemp }}°</p>
   </div>
   <p class='weather-description'>
-    {{ (today? weatherDescription.description:'none')| titlecase}}
+    {{ (today? weatherDescription.description:otherDayWeatherDescription) | titlecase}}
   </p>
 </div>
 

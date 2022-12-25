@@ -1,6 +1,7 @@
 .one-day-weather {
   color: var(--white);
   display: flex;
+  gap: 8px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -8,13 +9,13 @@
   .day-of-week {
     color: var(--white);
     font-weight: 400;
-    font-size: 16px;
+    font-size: 20px;
     line-height: 19px;
   }
   .date {
     color: var(--white);
     font-weight: 300;
-    font-size: 16px;
+    font-size: 20px;
     line-height: 19px;
     margin-bottom: 15px;
   }

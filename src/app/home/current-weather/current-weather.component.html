@@ -23,14 +23,16 @@
         </div>
       </div>
       <div class="center">
-        <div class="weather-icon">
-          <img [src]='weatherIconPath' [alt]="weatherDescription.main">
+        <div class="center-top">
+          <div class="weather-icon">
+            <img [src]='weatherIconPath' [alt]="weatherDescription.main">
+          </div>
+          <h2 class='weather-text'>
+            {{weatherDescription.description?(weatherDescription.description|titlecase): 'not found'}}
+          </h2>
         </div>
-        <h2 class='weather-text'>
-          {{weatherDescription.description?(weatherDescription.description|titlecase): 'not found'}}
-        </h2>
         <p class='weather-celsius'>
-          {{ activeCityData.main?.temp ? activeCityData.main?.temp : '-'}}°
+          {{ temp }}°
         </p>
       </div>
       <div class="right-side">

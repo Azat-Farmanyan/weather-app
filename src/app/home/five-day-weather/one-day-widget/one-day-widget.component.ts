@@ -5,6 +5,7 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { listItemDayWeather } from 'src/app/core/interfaces/interfaces';
 import { DateService } from 'src/app/core/services/date.service';
 import { WeatherService } from 'src/app/core/services/weather.service';
@@ -23,10 +24,13 @@ export class OneDayWidgetComponent implements OnInit, OnChanges {
   averageTemp = '';
   weatherIconPath = 'http://openweathermap.org/img/wn/11d@2x.png';
   middleWeather = 0;
+  activeCity = 'undefined';
+  temp = 'none';
 
   constructor(
     private dateService: DateService,
-    private weatherService: WeatherService
+    private weatherService: WeatherService,
+    private activatedRoute: ActivatedRoute
   ) {}
   ngOnChanges() {
     this.longDate = this.weatherData[0].dt_txt.split(' ')[0];
@@ -37,6 +41,7 @@ export class OneDayWidgetComponent implements OnInit, OnChanges {
       .splice(1)
       .reverse()
       .join('/');
+
     this.middleWeather =
       this.middleWeather === 1 ? 1 : Math.floor(this.weatherData.length / 2);
 
@@ -47,7 +52,13 @@ export class OneDayWidgetComponent implements OnInit, OnChanges {
     this.weatherIconPath = this.weatherService.weatherIconByCode(
       this.weatherData[this.middleWeather].weather[0].icon
     );
+    this.temp = String(this.weatherData[this.middleWeather].main.temp);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const activeCity = localStorage.getItem('activeCity');
+    if (activeCity) {
+      this.activeCity = JSON.stringify(activeCity).split('"').join('');
+    }
+  }
 }

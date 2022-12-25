@@ -1,8 +1,8 @@
-<div class="one-day card" [routerLink]="['/each-day','1',longDate]">
+<div class="one-day card" [routerLink]="['/each-day',activeCity,longDate]">
   <div class="one-day-body">
     <p class='text'>{{weekDay}}</p>
     <p class='text'>{{date}}</p>
     <img class='weather-icon' [src]="weatherIconPath" alt="">
-    <p class='text'>{{weatherData[middleWeather].main.temp}}°</p>
+    <p class='text'>{{temp}}°</p>
   </div>
 </div>

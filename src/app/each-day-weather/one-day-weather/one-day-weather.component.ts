@@ -2,6 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription, tap } from 'rxjs';
 import {
+  fiveDayWeather,
+  listItemDayWeather,
   todayWeather,
   weatherDescription,
 } from 'src/app/core/interfaces/interfaces';
@@ -17,6 +19,15 @@ export class OneDayWeatherComponent implements OnInit, OnDestroy {
   todayWeather: todayWeather;
   weatherDescription: weatherDescription = {};
   todayDate = this.dateService.formatDate(new Date()).split(' ')[0];
+  todayTemp = '';
+
+  otherDate = '';
+  otherDayData: listItemDayWeather;
+  otherDayWeatherDescription = '';
+  activeCity = '';
+  otherDayTemp = '-';
+  otherWeekDay = '';
+
   weatherIconPath = 'http://openweathermap.org/img/wn/01d@2x.png';
   // otherDayWeather:
   today = false;
@@ -24,6 +35,7 @@ export class OneDayWeatherComponent implements OnInit, OnDestroy {
 
   activeCoordinatesSubs: Subscription;
   currentWeatherSubs: Subscription;
+  fiveDayWeatherSubs: Subscription;
 
   constructor(
     private weatherService: WeatherService,
@@ -34,13 +46,48 @@ export class OneDayWeatherComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params) => {
       const activeDate = params['date']; // yyyy-mm-dd
+
+      this.otherWeekDay = this.dateService.getWeekDay('long', activeDate);
+
+      this.activeCity = params['activeCity'];
       if (activeDate === this.todayDate) {
         this.today = true;
         this.fetchTodayData();
-        console.log('today');
+        // console.log('today');
       } else {
         this.today = false;
-        console.log('not today');
+        this.otherDate = activeDate;
+        // console.log('not today');
+
+        let coordinatesString = localStorage.getItem('activeCityCoordinates');
+        if (coordinatesString) {
+          const coordinates: { lon: string; lat: string } =
+            JSON.parse(coordinatesString);
+
+          this.fiveDayWeatherSubs = this.weatherService
+            .getFiveDayWeatherByCoordinates(+coordinates.lat, +coordinates.lon)
+            .subscribe((fiveDayWeatherData) => {
+              let otherDaysWeatherData: listItemDayWeather[] = [];
+              if (fiveDayWeatherData.list) {
+                otherDaysWeatherData = fiveDayWeatherData.list;
+
+                const currentDayListItems: listItemDayWeather[] =
+                  otherDaysWeatherData.filter((listItem) => {
+                    return listItem.dt_txt.split(' ')[0] === activeDate;
+                  });
+                const middleWeatherIndex = Math.floor(
+                  currentDayListItems.length / 2
+                );
+                this.otherDayData = currentDayListItems[middleWeatherIndex];
+                this.otherDayTemp = String(
+                  Math.round(this.otherDayData.main!.temp)
+                );
+                this.otherDayWeatherDescription =
+                  this.otherDayData.weather[0].description;
+                // console.log(this.otherDayData.weather[0].description);
+              }
+            });
+        }
       }
       // console.log(this.allDayWeather);
     });
@@ -71,7 +118,13 @@ export class OneDayWeatherComponent implements OnInit, OnDestroy {
             )
             .subscribe((currentWeatherData) => {
               this.todayWeather = currentWeatherData;
-              console.log(this.todayWeather);
+
+              if (this.todayWeather.main!.temp) {
+                this.todayTemp = String(
+                  Math.round(this.todayWeather.main!.temp)
+                );
+              }
+              // console.log(this.todayWeather);
 
               this.isLoading = false;
             });
@@ -86,6 +139,8 @@ export class OneDayWeatherComponent implements OnInit, OnDestroy {
     if (this.today) {
       this.activeCoordinatesSubs.unsubscribe();
       this.currentWeatherSubs.unsubscribe();
+    } else {
+      this.fiveDayWeatherSubs.unsubscribe();
     }
   }
 }
