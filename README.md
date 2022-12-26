@@ -1,11 +1,18 @@
-# Screenshot
+# Angular WeatherApp
 
-#### Main page
+# Screenshots
 
-![MainPage](https://github.com/Azat-Farmanyan/weather-app/blob/main/src/assets/images/scrennshot.png?raw=true)
+#### Home page
 
-# WeatherApp
+![Home page](https://github.com/Azat-Farmanyan/weather-app/blob/main/src/assets/images/home-page-screenshot.png?raw=true)
 
+#### All day weather page
+
+![All day weather page](https://github.com/Azat-Farmanyan/weather-app/blob/main/src/assets/images/all-day-weather-page-screenshot.png?raw=true)
+
+#### Mobile/responsive app
+
+![Mobile version](https://github.com/Azat-Farmanyan/weather-app/blob/main/src/assets/images/mobile.png?raw=true)
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
 
 ## Development server
