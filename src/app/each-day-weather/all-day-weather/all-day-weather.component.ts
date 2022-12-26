@@ -44,7 +44,7 @@ export class AllDayWeatherComponent implements OnInit, OnDestroy {
                   });
                   this.isLoading = false;
 
-                  // console.log(this.allDayWeather);
+                  console.log(this.allDayWeather);
                 });
               },
               (error) => {
