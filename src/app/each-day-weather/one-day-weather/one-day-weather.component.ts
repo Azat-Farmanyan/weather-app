@@ -85,6 +85,8 @@ export class OneDayWeatherComponent implements OnInit, OnDestroy {
                 );
                 this.otherDayData = currentDayListItems[middleWeatherIndex];
 
+                this.weatherService.otherDayData.next(this.otherDayData);
+
                 this.otherDayTemp = String(
                   Math.round(this.otherDayData.main!.temp)
                 );

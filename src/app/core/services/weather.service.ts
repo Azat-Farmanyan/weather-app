@@ -36,6 +36,7 @@ export class WeatherService {
   currentWeatherData = new BehaviorSubject<todayWeather>({});
   fiveDayWeatherData = new BehaviorSubject<fiveDayWeather>({});
   allDayWeatherData = new BehaviorSubject<listItemDayWeather[]>([]);
+  otherDayData = new Subject<listItemDayWeather>();
 
   lastFiveSearchedCities = new BehaviorSubject<string[]>(
     JSON.parse(localStorage.getItem('lastSearchedCities') || '[]')

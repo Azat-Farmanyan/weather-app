@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { OneDayWeatherComponent } from './one-day-weather/one-day-weather.component';
 import { EachDayWeatherComponent } from './each-day-weather.component';
 import { OneHourBlockComponent } from './all-day-weather/one-hour-block/one-hour-block.component';
+import { WeatherDescriptionComponent } from './weather-description/weather-description.component';
 
 const routes: Routes = [{ path: '', component: EachDayWeatherComponent }];
 
@@ -15,6 +16,7 @@ const routes: Routes = [{ path: '', component: EachDayWeatherComponent }];
     EachDayWeatherComponent,
     AllDayWeatherComponent,
     OneHourBlockComponent,
+    WeatherDescriptionComponent,
   ],
   imports: [CommonModule, RouterModule.forChild(routes)],
 })

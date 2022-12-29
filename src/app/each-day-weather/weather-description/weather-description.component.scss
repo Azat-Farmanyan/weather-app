@@ -1,0 +1,12 @@
+.desc-block {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-around;
+  @media only screen and (max-width: 500px) {
+    gap: 5px;
+  }
+  .desc-item {
+    width: 150px;
+  }
+}

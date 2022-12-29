@@ -1,0 +1,7 @@
+<div class="desc-block">
+  <div class="card desc-item" *ngFor="let desc of data">
+    {{ desc[0].split('_').join(' ') | titlecase }}
+    :
+    {{ desc[1] }}
+  </div>
+</div>
